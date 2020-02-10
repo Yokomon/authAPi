@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
         trim: true
     },
 
-    username: {
+    name: {
         type: String,
         unique: true,
         required: 'Your username is required',
@@ -23,16 +23,31 @@ const UserSchema = new mongoose.Schema({
         max: 100
     },
 
-    firstName: {
+    bio: {
         type: String,
-        required: 'First Name is required',
-        max: 100
+        required: 'Your bio is necessary'
     },
 
-    lastName: {
+    mobile:{
         type: String,
-        required: 'Last Name is required',
-        max: 100
+        required: 'Your mobile number is required',
+        max: 14,
+    },
+    gender: {
+        type: String,
+        required: 'Please select your gender!'
+    },
+    logo:{
+        type: String,
+        required: 'Specify your logo here'
+    },
+    brandName:{
+        type: String,
+        required: 'Would you not want the world to know your Brand?'
+    },
+    priceRange:{
+        type: String,
+        required: 'What is the price range?'
     },
     profileImage: {
         type: String,
@@ -71,9 +86,7 @@ UserSchema.methods.generateJWT = function() {
     let payload = {
         id: this._id,
         email: this.email,
-        username: this.username,
-        firstName: this.firstName,
-        lastName: this.lastName,
+        name: this.name,
     };
 
     return jwt.sign(payload, process.env.JWT_SECRET, {
